@@ -30,13 +30,15 @@ for driver in drivers:
         raise Exception('No suitable video driver found!')
 
 
-screen = pygame.display.set_mode((1600, 900))
+
+width = pygame.display.Info().current_w
+height = pygame.display.Info().current_h
+screen = pygame.display.set_mode((width, height))
 pygame.font.init()
 
 bg = pygame.image.load('wood.bmp')
-bg = pygame.transform.scale(bg, (1600, 900))
+bg = pygame.transform.scale(bg, (width, height))
 screen.blit(bg, bg.get_rect())
-
 
 font = pygame.font.Font(None, 30)
 
