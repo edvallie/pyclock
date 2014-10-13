@@ -34,6 +34,10 @@ for driver in drivers:
 
 width = pygame.display.Info().current_w
 height = pygame.display.Info().current_h
+
+#width = 640
+#height = 480
+
 screen = pygame.display.set_mode((width, height))
 pygame.font.init()
 pygame.mouse.set_visible(False)
@@ -47,22 +51,24 @@ font = pygame.font.Font(None, 30)
 header_punchedIn = font.render('Punched In', True, (255, 255, 255), (0, 0, 0))
 header_punchedOut = font.render('Punched Out', True, (255, 255, 255), (0, 0, 0))
 
-print header_punchedIn.get_size()
+print header_punchedIn.get_size()[0]
 
 screen.blit(header_punchedIn, (width / 4, 50))
-screen.blit(header_punchedOut, (width / 4 + 460, 50))
+screen.blit(header_punchedOut, ((width / 4) + (width / 3.48), 50))
+
+print width
 
 #text_surface = font.render('Ben Dover', True, (255, 255, 255)) #white
 # Blit the text at 10, 0
 #screen.blit(text_surface, (10,0))
 
-box_punchedIn = pygame.Surface((400, height - 200))
+box_punchedIn = pygame.Surface((width / 4, height - 200))
 box_punchedIn.set_alpha(128)
 box_punchedIn.fill((0, 0, 0))
 screen.blit(box_punchedIn, (width / 4 - 50, 80))
 #pygame.draw.rect(screen, (33, 33, 33, 128), (0, 0, 100, 100))
 
-box_punchedOut = pygame.Surface((400, height - 200))
+box_punchedOut = pygame.Surface((width / 4, height - 200))
 box_punchedOut.set_alpha(128)
 box_punchedOut.fill((0, 0, 0))
 
@@ -79,7 +85,7 @@ for person in people_punchedOut:
 #text_surface = font.render('Hugh Janus', True, (255, 255, 255))
 #box_punchedOut.blit(text_surface, (0, 23))
 
-screen.blit(box_punchedOut, (width / 4 + 400, 80))
+screen.blit(box_punchedOut, ((width / 4) + (width / 4), 80))
 
 #update the display
 pygame.display.update()
