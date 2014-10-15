@@ -55,7 +55,7 @@ header_punchedOut = font.render('Punched Out', True, (255, 255, 255), (0, 0, 0))
 #print header_punchedIn.get_size()[0]
 
 screen.blit(header_punchedIn, (width * 0.25, height * 0.05556))
-screen.blit(header_punchedOut, ((width * 0.25) + (width * 0.2875), height * 0.05556))
+screen.blit(header_punchedOut, (width * 0.5375, height * 0.05556))
 
 # dimensions of the boxes containing people punched in/out
 box_width = width * 0.25
