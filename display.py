@@ -46,6 +46,7 @@ bg = pygame.image.load('wood.bmp')
 bg = pygame.transform.scale(bg, (width, height))
 screen.blit(bg, bg.get_rect())
 
+
 font = pygame.font.Font(None, 30)
 
 header_punchedIn = font.render('Punched In', True, (255, 255, 255), (0, 0, 0))
@@ -64,22 +65,57 @@ print width
 
 box_punchedIn = pygame.Surface((width / 4, height - 200))
 box_punchedIn.set_alpha(128)
-box_punchedIn.fill((0, 0, 0))
-screen.blit(box_punchedIn, (width / 4 - 50, 80))
-#pygame.draw.rect(screen, (33, 33, 33, 128), (0, 0, 100, 100))
+#box_punchedIn.fill((0, 0, 0))
+##pygame.draw.rect(screen, (33, 33, 33, 128), (0, 0, 100, 100))
 
 box_punchedOut = pygame.Surface((width / 4, height - 200))
 box_punchedOut.set_alpha(128)
-box_punchedOut.fill((0, 0, 0))
+#box_punchedOut.fill((0, 0, 0))
+
+
+# Font size for people's names
+font = pygame.font.Font(None, 21)
+
+people_punchedIn = ['Emmerson Bigguns', 'Shea Verpussi', 'Dick Gozinya', 'May Anne Naise', 'Amanda Faulk', 'Anna Bortion', 'Ben Dover', 'Berry McCaulkiner', 'Ben Wabawls', 'Buck Nekkid', 'Connie Lingus', 'Clint Toris', 'Craven Moorehead', 'Dick Cumming', 'Dee Flower', 'Drew Peacock', 'Doug McCockin', 'Dick Trickle', 'Eric Shun', 'Harry P. Ness', 'Harry Azzol', 'Haywood Jablomi', 'Hugh Janus', 'Issac Cox', 'Ivona Ryder', 'Semour Butts', 'Jack Mehoff', 'Justin Hermouth','Kimmy Hed', 'Lou Sanus', 'Martha Fokker', 'Mike Rotch', 'Mike Hunt', 'Neil Enbob', 'Ophelia Cuming', 'Penny Tration', 'Pat McRotch', 'Phil McCrackin', 'Ruben Mycock', 'Sarah Tonin', 'Wayne Kerr']
+
+text_surface = font.render(people_punchedIn[0], True, (255, 255, 255))
+font_size = text_surface.get_size()[1]
 
 
 y = 0
+i = 0
+for person in people_punchedIn:
+    if i % 2 == 0:
+        text_surface = font.render(person, True, (255, 255, 255))
+#        pygame.draw.rect(box_punchedIn, (255, 0, 0), (0, y, width / 4, font_size))
+    else:
+        text_surface = font.render(person, True, (0, 0, 0))
+        pygame.draw.rect(box_punchedIn, (255, 255, 255), (0, y, width / 4, font_size))
+
+    box_punchedIn.blit(text_surface, (10, y))
+    y += text_surface.get_size()[1]
+    i += 1
+
+
+screen.blit(box_punchedIn, ((width / 4- 50) , 80))
+
+
 people_punchedOut = ['Emmerson Bigguns', 'Shea Verpussi', 'Dick Gozinya', 'May Anne Naise', 'Amanda Faulk', 'Anna Bortion', 'Ben Dover', 'Berry McCaulkiner', 'Ben Wabawls', 'Buck Nekkid', 'Connie Lingus', 'Clint Toris', 'Craven Moorehead', 'Dick Cumming', 'Dee Flower', 'Drew Peacock', 'Doug McCockin', 'Dick Trickle', 'Eric Shun', 'Harry P. Ness', 'Harry Azzol', 'Haywood Jablomi', 'Hugh Janus', 'Issac Cox', 'Ivona Ryder', 'Semour Butts', 'Jack Mehoff', 'Justin Hermouth','Kimmy Hed', 'Lou Sanus', 'Martha Fokker', 'Mike Rotch', 'Mike Hunt', 'Neil Enbob', 'Ophelia Cuming', 'Penny Tration', 'Pat McRotch', 'Phil McCrackin', 'Ruben Mycock', 'Sarah Tonin', 'Wayne Kerr']
 
+
+y = 0
+i = 0
 for person in people_punchedOut:
-	text_surface = font.render(person, True, (255, 255, 255))
-	box_punchedOut.blit(text_surface, (10, y))
-	y += 23
+    if i % 2 == 0:
+        text_surface = font.render(person, True, (255, 255, 255))
+    else:
+        text_surface = font.render(person, True, (0, 0, 0))
+        pygame.draw.rect(box_punchedOut, (255, 255, 255), (0, y, width / 4, font_size))
+
+    box_punchedOut.blit(text_surface, (10, y))
+    y += text_surface.get_size()[1]
+    i += 1
+
 
 
 #text_surface = font.render('Hugh Janus', True, (255, 255, 255))
