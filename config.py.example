@@ -1,3 +1,6 @@
-username="db_user"
-password="db_pass"
-dbengine="pgsql"
+dbhost="ip"
+dbuser="db_user"
+dbname="database_name"
+dbpass="database_password"
+dbengine="not_currently_used"
+
