@@ -17,10 +17,11 @@ def testSql():
 
 def insertPunch(employee_id):
     print employee_id
-    cur.execute ("SELECT * FROM employees")
-    rows = cur.fetchall()
-    for i, row in enumerate(rows):
-        print "Row", i, "value = ", row
+    cur.execute ("SELECT employee_id FROM employees where employee_id = " + employee_id)
+    fuck = cur.fetchone()
+    #print str(fuck)
+    #for i, row in enumerate(rows):
+    #    print "Row", i, "value = ", row
 
 def checkPunches():
     print "derp"

@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import psycopg2 as dbapi2
 from config import *
+import datetime
 #import ConfigParser
 #import io
 #import config
@@ -16,15 +17,53 @@ def testSql():
         print "Row", i, "value = ", row
 
 def insertPunch(employee_id):
-    print employee_id
-    cur.execute ("SELECT * FROM employees")
+    sql = "INSERT INTO timestamps (employee_id, timestamp) VALUES('" + employee_id + "', NOW())"
+    print sql
+    cur.execute (sql)
+    db.commit ()
+    print "Entered timestamp for employee_id: ", employee_id
+
+def getPunchedIn():
+    print "derp"
+    employeesOut = []
+    employeesIn = []
+    i = datetime.date.today()
+    today = i.isoformat()
+    print today
+    sql = "SELECT employee_id, COUNT(*) FROM timestamps WHERE timestamp > '" + today + "' GROUP BY employee_id"
+    cur.execute (sql)
     rows = cur.fetchall()
     for i, row in enumerate(rows):
-        print "Row", i, "value = ", row
+        eid = row[0]
+        IntPunches = row[1]
+        if IntPunches%2 == 0:
+            sql = "SELECT full_name, timestamp FROM employees, timestamps where employees.employee_id = timestamps.employee_id AND timestamps.employee_id = '" + str(row[0]) + "' ORDER BY timestamps.timestamp DESC LIMIT 1"
+            cur.execute(sql)
+            entry = cur.fetchone()
+            name = entry[0]
+            time = entry[1]
+            now = datetime.datetime.now()
+            tdelta = now - time
+            td = str(tdelta)[:-10]
+            output = name + " " + td
+            employeesOut.append( output )
+        else:
+            sql = "SELECT full_name, timestamp FROM employees, timestamps where employees.employee_id = timestamps.employee_id AND timestamps.employee_id = '" + str(row[0]) + "' ORDER BY timestamps.timestamp DESC LIMIT 1"            
+            cur.execute(sql)
+            entry = cur.fetchone()            
+            name = entry[0]
+            time = entry[1]
+            now = datetime.datetime.now()
+            tdelta = now - time
+            td = str(tdelta)[:-10]
+            output = name + " " + td 
+            employeesIn.append( output )
 
-def checkPunches():
-    print "derp"
+            #employeesIn = ""
+    print employeesIn
+    print employeesOut
+    return employeesIn, employeesOut
 
 
-testSql()
 insertPunch("9999")
+getPunchedIn()
