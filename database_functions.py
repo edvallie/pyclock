@@ -18,6 +18,16 @@ def insertPunch(employee_id):
     db.commit ()
     print "Entered timestamp for employee_id: ", employee_id
 
+def getName(employee_id):
+    sql = "SELECT full_name from employees where employee_id = '" + employee_id + "'"
+    cur.execute (sql)
+    row = cur.fetchone()
+    if row:
+        employee_name = row[0]
+    else:
+        employee_name = ""
+    return employee_name
+
 def getPunches():
     employeesOut = []
     employeesIn = []
