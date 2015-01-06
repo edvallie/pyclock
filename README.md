@@ -2,6 +2,8 @@ A simple timeclock display written for use on a Raspberry Pi via framebuffer
 
 Reads an ID card through keyboard wedge interface (most barcode and magstripe readers)
 
+![screen shot](https://github.com/edvallie/pyclock/raw/master/screenshot.png)
+
 Written in python
 Uses pygame module for graphics, psycopg for database routines
 
