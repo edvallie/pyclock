@@ -53,7 +53,8 @@ def getPunches():
             employeesOut.append( output )
         else:
             employeesIn.append( output )
-
+    employeesIn.sort()
+    employeesOut.sort()
     print employeesIn
     print employeesOut
     return employeesIn, employeesOut
