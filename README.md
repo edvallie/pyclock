@@ -16,7 +16,7 @@ apt-get install python-psycopg2
 Needs a postgres backend either on the Pi or remote server.
 
 Database scheme as follows:
-
+```
 timeclock=# \d+ employees
                     Table "public.employees"
    Column    |          Type          | Modifiers | Description
@@ -41,4 +41,4 @@ Indexes:
     "timestamps_pkey" PRIMARY KEY, btree (id)
     "timestamp_record" UNIQUE, btree ("timestamp", employee_id)
 Has OIDs: no
-
+```
