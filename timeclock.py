@@ -96,7 +96,7 @@ while True:
     people_punchedIn = punches[0]
     people_punchedOut = punches[1]
 
-    text_surface = font.render(people_punchedIn[0], True, (255, 255, 255))
+    text_surface = font.render('sample data for font sizing', True, (255, 255, 255))
     font_size = text_surface.get_height()
 
     y = 0
