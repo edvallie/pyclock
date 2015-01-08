@@ -141,8 +141,10 @@ while True:
                 elif evt.key == K_RETURN:
                     punch_name = str(getName(punch_id))
                     if punch_name:
-                        insertPunch(punch_id)
-                        punch_history = 'Last punch collected for ' + str(getName(punch_id)) + ' at ' + time.strftime('%T %D')
+                        if insertPunch(punch_id):
+                            punch_history = 'Last punch collected for ' + str(getName(punch_id)) + ' at ' + time.strftime('%T %D')
+                        else:
+                            punch_history = 'Error: database problem, contact administrator'
                     else:
                         punch_history = 'Error: Punch not read!'
                     punch_id = ''
