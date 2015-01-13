@@ -5,40 +5,48 @@ import psycopg2 as dbapi2
 from config import *
 import datetime
 
-
-
-try:
-    db = dbapi2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass)
-    cur = db.cursor()
-except:
-    pass
+#try:
+#    db = dbapi2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass)
+#    cur = db.cursor()
+#except:
+#    pass
 
 def testSql():
     try:
+        db = dbapi2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass)
+        cur = db.cursor()
         cur.execute ("SELECT * FROM employees")
         rows = cur.fetchall()
         for i, row in enumerate(rows):
             print "Row", i, "value = ", row
+        db.close()
     except:
         pass
+
 def insertPunch(employee_id):
     try:
+        db = dbapi2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass)
+        cur = db.cursor()
         sql = "INSERT INTO timestamps (employee_id, timestamp) VALUES('" + employee_id + "', NOW())"
         print sql
         cur.execute (sql)
         db.commit ()
         print "Entered timestamp for employee_id: ", employee_id
+        db.close()
         return True
     except:
         return False
 
 def getName(employee_id):
     try:
+        db = dbapi2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass)
+        cur = db.cursor()
         sql = "SELECT full_name from employees where employee_id = '" + employee_id + "'"
         cur.execute (sql)
         row = cur.fetchone()
+        db.close()
         if row:
-            employee_name = row[0]
+            return row[0]
         else:
             return ''
     except:
@@ -46,6 +54,8 @@ def getName(employee_id):
 
 def getPunches():
     try:
+        db = dbapi2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass)
+        cur = db.cursor()
         employeesOut = []
         employeesIn = []
         i = datetime.date.today()
@@ -70,10 +80,11 @@ def getPunches():
                 employeesOut.append( output )
             else:
                 employeesIn.append( output )
+        db.close()
         employeesIn.sort()
         employeesOut.sort()
-        print employeesIn
-        print employeesOut
+        #print employeesIn
+        #print employeesOut
         return employeesIn, employeesOut
     except:
         return ['Database Error'], ['Database Error']
