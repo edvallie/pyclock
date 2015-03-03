@@ -35,7 +35,9 @@ fi
 
 
 if [ -n "$LOGFILE" ]; then
+	cd "$CWD"
 	"$CWD/timeclock.py" &>>$LOGFILE &
 else
+	cd "$CWD"
 	"$CWD/timeclock.py" &>>/dev/null &
 fi
