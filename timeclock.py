@@ -59,6 +59,7 @@ while True:
         font = pygame.font.Font(None, 24)
         text_surface = font.render(punch_history, True, (255, 255, 255))
         screen.blit(text_surface, ((width * 0.35 / 2) - (text_surface.get_width() / 2), height - text_surface.get_height()))
+
  
     # screen position of the list of people punched in
     box_punchedIn_x = width * 0.41875
@@ -140,13 +141,21 @@ while True:
                     punch_id += evt.unicode
                 elif evt.key == K_RETURN:
                     punch_name = str(getName(punch_id))
-                    if punch_name:
+                    if len(punch_name) > 0:
                         if insertPunch(punch_id):
-                            punch_history = 'Last punch collected for ' + str(getName(punch_id)) + ' at ' + time.strftime('%T %D')
+                            punch_history = 'Last punch collected for ' + punch_name + ' at ' + time.strftime('%T %D')
+                            punch_id = ''
+                            punch_name = ''
+                            now = ''
                         else:
                             punch_history = 'Error: database problem, contact administrator'
+                            punch_id = ''
+                            punch_name = ''
+                            now = ''
+        
                     else:
                         punch_history = 'Error: Punch not read!'
+                    punch_name = ''
                     punch_id = ''
                     now = ''
                     break

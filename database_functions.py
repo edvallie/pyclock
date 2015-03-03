@@ -1,19 +1,19 @@
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
 
-import psycopg2 as dbapi2
+import psycopg2
 from config import *
 import datetime
 
 #try:
-#    db = dbapi2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass)
+#    db = psycopg2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass)
 #    cur = db.cursor()
 #except:
 #    pass
 
 def testSql():
     try:
-        db = dbapi2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass)
+        db = psycopg2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass, connect_timeout=3)
         cur = db.cursor()
         cur.execute ("SELECT * FROM employees")
         rows = cur.fetchall()
@@ -25,7 +25,7 @@ def testSql():
 
 def insertPunch(employee_id):
     try:
-        db = dbapi2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass)
+        db = psycopg2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass, connect_timeout=3)
         cur = db.cursor()
         sql = "INSERT INTO timestamps (employee_id, timestamp) VALUES('" + employee_id + "', NOW())"
         print sql
@@ -39,7 +39,7 @@ def insertPunch(employee_id):
 
 def getName(employee_id):
     try:
-        db = dbapi2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass)
+        db = psycopg2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass, connect_timeout=3)
         cur = db.cursor()
         sql = "SELECT full_name from employees where employee_id = '" + employee_id + "'"
         cur.execute (sql)
@@ -54,7 +54,7 @@ def getName(employee_id):
 
 def getPunches():
     try:
-        db = dbapi2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass)
+        db = psycopg2.connect (host=dbhost, database=dbname, user=dbuser, password=dbpass, connect_timeout=3)
         cur = db.cursor()
         employeesOut = []
         employeesIn = []
